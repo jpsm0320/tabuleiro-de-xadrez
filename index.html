@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabuleiro de Xadrez</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0; /* Cor de fundo opcional */
+        }
+
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="tabuleiro"></canvas>
+
+    <script>
+        // Função para ajustar o tamanho do canvas e centralizar o tabuleiro
+        function ajustarTamanhoCanvas() {
+            var canvas = document.getElementById("tabuleiro");
+            var ctx = canvas.getContext("2d");
+
+            // Tamanho da tela
+            var largura = window.innerWidth;
+            var altura = window.innerHeight;
+
+            // Tamanho das células do tabuleiro
+            var tamanho = Math.floor(Math.min(largura, altura) / 8); // Cada quadrado terá o tamanho adequado para a tela
+
+            // Atualiza o tamanho do canvas
+            canvas.width = tamanho * 8; // O canvas terá a largura de 8 quadrados
+            canvas.height = tamanho * 8; // O canvas terá a altura de 8 quadrados
+
+            // Desenha o tabuleiro de xadrez
+            for (var linha = 0; linha < 8; linha++) {
+                for (var coluna = 0; coluna < 8; coluna++) {
+                    // Alterna as cores dos quadrados
+                    if ((linha + coluna) % 2 == 0) {
+                        ctx.fillStyle = "#FFFFFF"; // Branco
+                    } else {
+                        ctx.fillStyle = "#000000"; // Preto
+                    }
+                    // Desenha o quadrado no canvas
+                    ctx.fillRect(coluna * tamanho, linha * tamanho, tamanho, tamanho);
+                }
+            }
+        }
+
+        // Chama a função ao carregar a página e também ao redimensionar a janela
+        window.onload = ajustarTamanhoCanvas;
+        window.onresize = ajustarTamanhoCanvas;
+    </script>
+
+</body>
+</html>
